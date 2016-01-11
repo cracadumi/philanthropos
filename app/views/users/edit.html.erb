@@ -1,0 +1,396 @@
+<h4 class="page_title">Modification fiche membre</h4>
+  <div class="edit_instructions"><p class="textual_info_edit">Les informations que vous communiquez sur le site du réseau des anciens sont visibles uniquement par:</p>
+    <ul>
+      <li>Les Philanthropotes du réseau : <%= image_tag "reseau.png" %></li>
+      <li>L’Institut Philanthropos : <%= image_tag "institut.png" %></li>
+    </ul>
+  </div>
+<%= form_for @user, validate: true, html: { id: 'user_edit' } do |f| %>
+  <div class="col-sm-12 form_Modification">
+    <div class="col-sm-3">
+      <%= image_tag get_picture(@user), class: 'img-responsive', id: 'img_holder' %>
+      <%= f.file_field :picture_url, class: ' form-control', id: 'img_input' %>
+      <% if can? :destroy, @user %>
+        <%= link_to 'Effacer le membre', user_path(@user), :method => 'delete', data: {confirm: "Are you sure?"}, class: 'btn btn-default'%>
+      <% end %>
+       <% if current_user.is? "admin" %>
+       <%= f.select :role,  options_for_select(User.roles.keys.map { |w| [display_french_roles(w), w] },@user.role), {},{class: 'form-control'} %>
+       <% end %>
+    </div>
+    <div class="col-sm-9">
+    <h3 class="edit_page_sub_heading">Informations de base</h3>
+    <p>Les données invariables pas ne sont pas modifiables. S’il y a une erreur, merci de contacter un administrateur !</p>
+    <ul class="info_form">
+      <li>
+      <div class="img_holder">
+         <%= image_tag "institut.png" %>
+          <%= image_tag 'reseau.png', class: 'img-responsive'  %>
+      </div>
+         <div class="form-group ">
+            <%= f.label t('nom'), class: 'col-sm-4 control-label required' %>
+            <div class="col-sm-4">
+              <%= f.text_field :nom,  class: 'form-control' %>
+            </div>
+          </div>
+      </li>
+      <li>
+      <div class="img_holder">
+         <%= image_tag "institut.png" %>
+          <%= image_tag 'reseau.png', class: 'img-responsive'  %>
+      </div>
+        <div class="form-group ">
+            <%= f.label "#{t('prenom')}: ", class: 'col-sm-4 control-label' %>
+            <div class="col-sm-4">
+            <%= f.label :prenom_val,  class: 'control-label ', value: @user.prenom %>
+            <%= image_tag 'users/lock.png', class: 'img-responsive lock_icon', title:  mandatory_image_title %>
+            </div>
+          </div>
+      </li>
+      <li>
+        <% if @user.ident_sexe == 'femme'%>
+          <div class="img_holder">
+           <%= image_tag 'institut.png', class: 'img-responsive' %>
+            <%= image_tag 'reseau.png', class: 'img-responsive'  %>
+        </div>
+            <div class="form-group ">
+              <%= f.label t('maiden_name'), class: 'col-sm-4 control-label' %>
+              <div class="col-sm-4">
+                <%= f.text_field :maiden_name,  class: 'form-control' %>
+                <small>Laissez vide si vous n’êtes pas concernée</small>
+              </div>
+            </div>
+          <% end %>
+      </li>
+      <li>
+      <div class="img_holder">
+           <%= image_tag "institut.png" %>
+            <%= image_tag 'reseau.png', class: 'img-responsive'  %>
+        </div>
+        <div class="form-group ">
+          <%= f.label "#{t('promo')}: ", class: 'col-sm-4 control-label' %>
+          <div class="col-sm-4">
+          <%= f.label :promo_val,  class: 'control-label ', value: get_user_promo(@user.promo) %>
+          <%= image_tag 'users/lock.png', class: 'img-responsive lock_icon ', title:  mandatory_image_title %>
+          </div>
+        </div>
+      </li>
+      <li>
+      <div class="img_holder">
+           <%= image_tag "institut.png" %>
+            <%= image_tag 'reseau.png', class: 'img-responsive'  %>
+        </div>
+         <div class="form-group">
+        <%= f.label "#{t('sex')}: ", class: 'col-sm-4 control-label' %>
+        <div class="col-sm-4">
+        <%= f.label :sexe_val,  class: 'control-label ', value: @user.ident_sexe%>
+        <%= image_tag 'users/lock.png', class: 'img-responsive lock_icon', title:  mandatory_image_title %>
+        </div>
+      </div>
+      </li>
+      <li>
+      <div class="img_holder">
+           <%= image_tag "institut.png" %>
+            <%= image_tag 'reseau.png', class: 'img-responsive'  %>
+        </div>
+         <div class="form-group">
+          <%= f.label "#{t('nationality')}: ", class: 'col-sm-4 control-label'%>
+          <div class="col-sm-4">
+          <%= f.label :ident_nationalite_val, class: 'control-label', value: @user.ident_nationalite %>
+          <%= image_tag 'users/lock.png', class: 'img-responsive lock_icon', title:  mandatory_image_title %>
+          </div>
+        </div>
+      </li>
+      <li>
+      <div class="img_holder">
+           <%= image_tag "institut.png" %>
+            <%= image_tag 'reseau.png', class: 'img-responsive'  %>
+        </div>
+         <div class="form-group">
+        <%= f.label "#{t('dob')}: ", class: 'col-sm-4 control-label' %>
+        <div class="col-sm-4">
+        <%= f.label :ident_date_naissance,  class: 'control-label ', value: get_formatted_date(@user.ident_date_naissance) %>
+        <%= image_tag 'users/lock.png', class: 'img-responsive lock_icon', title:  mandatory_image_title %>
+        </div>
+      </div>
+      </li>
+      <li>
+      <div class="img_holder">
+          .
+        </div>
+        <div class="form-group">
+        <%= f.fields_for :right  do |right| %>
+          <%= right.label "#{t('visibility_age')}", class: ' control-label col-sm-4' %>
+          <div class="col-sm-6">
+            <%= right.select :age_is_viewable, options_for_select(Right::ACCESSIBLE.collect {|p| [ p['right'], p['id'] ] }, @user.right.age_is_viewable),{}, {class: 'form-control'} %>
+          </div>
+        <% end %>
+      </div>
+      </li>
+      <li>
+      <div class="img_holder">
+           <%= image_tag "institut.png" %>
+            <%= image_tag 'reseau.png', class: 'img-responsive'  %>
+        </div>
+         <div class="form-group ">
+          <%= f.label  t('email'), class: ' control-label col-sm-4 required' %>
+          <div class="col-sm-6">
+            <%= f.text_field :email,  class: 'form-control' %>
+          </div>
+        </div>
+      </li>
+      <li>
+      <div class="img_holder">
+           .
+        </div>
+        <div class="form-group ">
+        <%= f.fields_for :right  do |right| %>
+          <%= right.label t('visibility'), class: 'control-label col-sm-4' %>
+          <div class="col-sm-6">
+            <%= right.select :email_veiwable_by, options_for_select(Right::ACCESSIBLE.collect {|p| [ p['right'], p['id'] ] }, @user.right.email_veiwable_by),{}, {class: 'form-control'} %>
+          </div>
+        <% end %>
+      <%= f.fields_for :contact_info, validate: true  do |contact_info| %>
+      </div>
+      </li>
+      <li>
+      <div class="img_holder">
+           <%= image_tag "institut.png" %>
+            <%= image_tag 'reseau.png', class: 'img-responsive'  %>
+        </div>
+        <div class="form-group">
+          <%= f.label "#{t('d_adresse')}: ", class: 'col-sm-4 control-label'%>
+          <div class="col-sm-4">
+          <%= f.label :d_adresse_val, class: 'control-label ', value: @user.d_adresse %>
+          <%= image_tag 'users/lock.png', class: 'img-responsive lock_icon', title:  mandatory_image_title %>
+          </div>
+        </div>
+      </li>
+      <li>
+      <h3>Coordonnées permanentes de contact pour l’Institut
+</h3>
+<p>
+Ces informations sont synchronisées régulièrement avec la base de données interne de Philanthropos. Vous bougez tous les 6 mois ? Vous êtes à l’étranger pour quelques temps ? Indiquez une adresse permanente (par exemple celle de vos parents). C’est à ces coordonnées (visibles uniquement par l’Institut) que vous seront envoyées tous les courriers officiels. Vérifiez qu’elles soient à jour !
+</p>
+     
+      </li>
+      <li>
+          <div class="img_holder">
+         <%= image_tag "institut.png" %>
+      </div>
+      <div class="form-group ">
+          <%= contact_info.label t('permanent_address'), class: 'col-sm-5 control-label required' %>
+          <div class="col-sm-5">
+            <%= contact_info.text_area :adresse,  class: 'form-control', rows: "7" %>
+        </div>
+        </div>
+     
+      </li>
+      <li>
+       <div class="img_holder">
+         <%= image_tag "institut.png" %>
+      </div>
+           <div class="form-group ">
+          <%= contact_info.label t('postal_address'), class: 'col-sm-5 control-label required' %>
+          <div class="col-sm-5">
+            <%= contact_info.text_field :npa_localite,  class: 'form-control' %>
+          </div>
+        </div>
+      </li>
+      <li>
+      <div class="img_holder">
+         <%= image_tag "institut.png" %>
+      </div>
+         <div class="form-group ">
+          <%= contact_info.label t('permanent_country'), class: 'col-sm-5 control-label required' %>
+          <div class="col-sm-5">
+             <%= contact_info.select :pays, options_for_select(@pays_options.collect {|p| [ p[:name], p[:code] ] },@user.contact_info.pays),{}, class: 'form-control' %>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="img_holder">
+        <%= image_tag "institut.png" %>
+      </div>
+        <div class="form-group ">
+          <%= contact_info.label t('permanent_phone'), class: 'col-sm-5 control-label required' %>
+          <div class="col-sm-5">
+            <%= contact_info.text_field :tel_home,  class: 'form-control' %>
+            <small>N’oubliez pas le préfixe international (ex : +33, +41) !</small>
+          </div>
+        </div>
+      </li>
+      <li>
+        <h3>Coordonnées actuelles de contact entre anciens</h3>
+        <p>Ces informations seront visibles sur le site du réseau des anciens. C’est grâce à elles que vous serez positionné sur la carte du monde lors d’une recherche, ou bien que vous allez trouver d’autres Philanthropotes dans votre ville. Indiquez le lieu dans lequel vous vivez (même provisoirement !). Les coordonnées actuelles peuvent être les mêmes que les coordonnées permanentes bien évidemment !</p>
+      </li>
+      <li>
+        <div class="img_holder">
+         <%= image_tag 'reseau.png', class: 'img-responsive' %>
+         >
+      </div>
+      <div class="form-group ">
+          <%= contact_info.label t('current_address'), class: 'col-sm-5 control-label' %>
+          <div class="col-sm-5">
+            <%= contact_info.text_area :current_address,  class: 'form-control', rows: "7" %>
+          </div>
+        </div>
+
+      </li>
+      <li>
+      <div class="img_holder">
+         .
+      </div>
+        <div class="form-group ">
+         <%= f.fields_for :right  do |right| %>
+            <%= right.label t('visibility'), class: ' control-label col-sm-5' %>
+            <div class="col-sm-5">
+              <%= right.select :address_viewable_by, options_for_select(Right::ACCESSIBLE.collect {|p| [ p['right'], p['id'] ] }, @user.right.address_viewable_by),{}, {class: 'form-control'} %>
+            </div>
+          <% end %> 
+          </div> 
+      </li>
+      <li>
+      <div class="img_holder">
+         <%= image_tag 'reseau.png', class: 'img-responsive' %>
+         >
+      </div>
+        <div class="form-group ">
+          <%= contact_info.label t('current_post_address'), class: 'col-sm-5 control-label' %>
+          <div class="col-sm-5">
+            <%= contact_info.text_field :current_postcode,  class: 'form-control' %>
+          </div>
+        </div>
+      </li>
+      <li>
+       <div class="img_holder">
+         <%= image_tag 'reseau.png', class: 'img-responsive' %>
+         >
+      </div>
+        <div class="form-group ">
+          <%= contact_info.label t('current_town'), class: 'col-sm-5 control-label' %>
+          <div class="col-sm-5">
+            <%= contact_info.text_field :current_town,  class: 'form-control' %>
+          </div>
+        </div>
+      </li>
+      <li>
+         <div class="img_holder">
+         <%= image_tag 'reseau.png', class: 'img-responsive' %>
+          
+      </div>
+      <div class="form-group ">
+          <%= contact_info.label t('current_country'), class: 'col-sm-5 control-label' %>
+          <div class="col-sm-5">
+          <%= contact_info.select :current_country, options_for_select(@current_countries.collect {|p|[p[:french_name],p[:name]]},@user.contact_info.current_country),{}, class: 'form-control' %>
+          </div>
+        </div>
+      </li>
+      <li>
+       <div class="img_holder">
+         <%= image_tag 'reseau.png', class: 'img-responsive' %>
+          
+      </div>
+         <div class="form-group">
+              <%= contact_info.label t('tel_natel'), class: ' control-label col-sm-5' %>
+              <div class="col-sm-5">
+                <%= contact_info.text_field :tel_natel,  class: 'form-control' %>
+                <small>avec le préfixe international ! </small>
+              </div>
+            </div>
+      </li>
+      <li>
+      <div class="img_holder">
+       .
+      </div>
+        <div class="form-group ">
+          <%= f.fields_for :right  do |right| %>
+            <%= right.label t('visibility'), class: ' control-label col-sm-5' %>
+            <div class="col-sm-5">
+              <%= right.select :tel_natel_viewable_by, options_for_select(Right::ACCESSIBLE.collect {|p| [ p['right'], p['id'] ] }, @user.right.tel_natel_viewable_by),{}, {class: 'form-control'} %>
+            </div>
+          <% end %>
+          </div>
+      </li>
+      <li>
+        <h3>Informations sur votre activité</h3>
+        <p>Envie d’en savoir plus sur ce que font les Philanthropotes ? Besoin d’un coup de pouce pour une orientation, un stage, un job ? Envie de créer un groupe de réflexion sur les problèmes rencontrés dans votre activité ? Envie de partager vos initiatives ? Dire que votre porte est ouverte pour un Philanthropote de passage ? Dites nous ce que vous faites actuellement !</p>
+      </li>
+      <li>
+        <div class="img_holder">
+         <%= image_tag 'reseau.png', class: 'img-responsive' %>
+          
+      </div>
+       <div class="form-group ">
+        <%= f.label t('occupation'), class: 'col-sm-5 control-label' %>
+        <div class="col-sm-5">
+          <%= f.select :occupation, options_for_select(User::OCCUPATIONS,@user.occupation),{}, {class: 'form-control'} %>
+        </div>
+      </div>
+      </li>
+      <li>
+        <div class="img_holder">
+         <%= image_tag 'reseau.png', class: 'img-responsive' %>
+          
+      </div>
+       <div class="form-group ">
+        <%= f.label t('industry'), class: 'col-sm-5 control-label' %>
+        <div class="col-sm-5">
+          <%= f.select :industry, options_for_select(User::INDUSTRIES,@user.industry),{}, {class: 'form-control'} %>
+        </div>
+      </div>
+      </li>
+      <li>
+        <div class="img_holder">
+         <%= image_tag "institut.png" %>
+          <%= image_tag 'reseau.png', class: 'img-responsive'  %>
+      </div>
+       <div class="form-group ">
+        <%= f.label t('ident_activite'), class: 'col-sm-5 control-label' %>
+        <div class="col-sm-5">
+          <%= f.text_field :ident_activite,  class: 'form-control' %>
+          <small>Exemple : « Etudiant en Licence de Droit »</small>
+        </div>
+      </div>
+      </li>
+      <li>
+        <div class="img_holder">
+         <%= image_tag 'reseau.png', class: 'img-responsive' %>
+         
+      </div>
+      <div class="form-group ">
+        <%= f.label t('about'), class: 'col-sm-5 control-label' %>
+        <div class="col-sm-5">
+          <%= f.text_area :about,  class: 'form-control text_area-box' %>
+        </div>
+      </div>
+      </li>
+      <li>
+      <h3>Visibilité de votre profil</h3>
+        <div class="img_holder">
+         <%= image_tag 'reseau.png', class: 'img-responsive' %>
+         
+      </div>
+         <div class="form-group ">
+        <%= f.label t('active'), class: 'col-sm-5 control-label' %>
+        <div class="col-sm-5">
+          <%= f.select :active, options_for_select([['Activé', true], ['Désactivé', false]],@user.active),{}, {class: 'form-control'} %>
+        </div>
+      </div>
+      <p>Attention ! Si vous désactivez votre profil, vous serez instantanément déconnecté du site du réseau des anciens. Vous ne pourrez plus accéder aux publications ni à l’annuaire des Philanthropotes.
+</p>
+<p>En cas de désactivation, seuls les données « Prénom », « Nom » et « N° de promo » resteront visibles aux autres anciens connectés.</p>
+<p>Pour réactiver votre profil, vous devrez contacter un administrateur.</p>
+ <%= f.submit 'ENREGISTRER', class: 'btn btn-default'%><p></p> 
+ <p>Ici ce n’est pas Facebook ! Le changement d’information de votre profil ne déclenchera pas de notification sur le « wall », ni d’email à vos « friends ». Si vous souhaitez partager une nouvelle importante avec les Philanthropotes, contacter votre responsable de promo pour une publication dans la rubrique  « Carnet de vie » ou une brève par l’équipe com dans la rubrique « News du réseau » ! Pour partager une info, une demande, une offre publiez la dans la rubrique « Agora des anciens » !
+
+</p>
+      </li>
+      <li>
+        
+      </li>
+    </ul>
+      <% end %>
+     
+  </div>
+</div>
+<% end %> 

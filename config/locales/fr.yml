@@ -1,0 +1,182 @@
+fr:
+  d_adresse: 'ID Access'
+  nom: 'Nom'
+  prenom: 'Prénom'
+  email: 'Adresse email'
+  maiden_name: 'Nom de jeune fille'
+  dob: 'Date de naissance'
+  sex: 'Sexe'
+  visibility_age: 'Votre âge est visible par'
+  visibility: 'Visible par'
+  promo: 'N° Promo'
+  nationality: 'Nationalité'
+  permanent_address: 'Adresse'
+  current_address: 'Adresse'
+  postal_address: 'Code postal et ville'
+  permanent_country: 'Pays'
+  permanent_phone: 'Téléphone'
+  current_post_address: 'Code postal'
+  current_town: 'Ville'
+  current_country: 'Pays'
+  tel_natel: 'Téléphone'
+  occupation: 'Activité'
+  industry: "Domaine d' activité"
+  ident_activite: "Description de l'activité"
+  about: 'A propos'
+  date_modification: 'Date_modif'
+  date_import: "Date d'exportation des données"
+  active: 'Fiche active'
+  keyword: "Mot clés"
+  category: 'Categorie'
+  subcategory: 'Sous catégorie'
+  title: 'Titre'
+  content: 'Contenu'
+  post_image: 'Joindre photo'
+  last_modified: 'Date modification'
+  age: 'Age'
+  role: "Rôle"
+  old_password: "Ancien mot de passe"
+  new_password: "Nouveau mot de passe"
+  confirm_password: "Confirmation du nouveau mot de passe"
+  xls_nom: 'Nom'
+  xls_maiden_name: 'Nom_jfille'
+  xls_email: 'mail'
+  xls_address: 'Adresse'
+  xls_npa_localite: 'NPA_localite'
+  xls_pays: 'Pays'
+  xls_tel_home: 'Tel_home'
+  xls_tel_natel: 'Tel_natel'
+  xls_ident_activite: "Ident_activité"
+  xls_date_import: "Date de d' exportation DES DONNEES"
+  xls_date_modified: "Date modification"
+  xls_prenom: "Prénom"
+  xls_photo: "Photo"
+  xls_sex: "sexe"
+  xls_promo: "N°Promo"
+  xls_dob: "Date de naissance"
+  xls_nationality: "Nationalité"
+  xls_permanent_adderss: "Adresse permanente"
+  xls_zip_permanent_city: "Code postal et ville permanente"
+  xls_permanent_country: "Pays permanent"
+  xls_tel_permanent: "Tel permanent"
+  xls_current_address: "Adresse actuelle"
+  xls_current_postcode: "Code postal actuelle"
+  xls_current_town: "Ville actuelle"
+  xls_current_country: "Pays actuel"
+  xls_current_tel: "N° telephone actuel"
+  xls_activite: "Activité"
+  xls_industry: "Domaine d'activité"
+  xls_occupation: "Description de l'activité"
+  xls_about: "A propos"
+  xls_active_status: "Fiche active"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: 'ne peut pas être vide'
+              invalid: 'mauvais format e-mail'
+            nom:
+              blank: 'ne peut pas être vide'
+              invalid: 'format invalide de nom'
+            current_password:
+              blank: 'Mot de passe actuel ne peut être vide'
+              invalid: 'Votre ancien mot de passe est incorrect'
+            password:
+              blank: "Mot de passe ne peut être vide"
+              too_short: 'Mot de passe est trop court'  
+            password_confirmation:
+              confirmation: "Les deux derniers champs doivent-être identique"
+              blank: "Confirmer mot de passe ne peut être vide"  
+        contact_info:
+          attributes:
+            adresse:
+              blank: 'ne peut pas être vide'
+            npa_localite:
+              blank: 'ne peut pas être vide' 
+            tel_home:
+              blank: 'ne peut pas être vide'
+        post:
+          attributes:
+            title:
+              blank: 'ne peut pas être vide'
+            content:
+              blank: 'ne peut pas être vide'
+            subcategory_id:
+              blank: 'ne peut pas être vide'                  
+  bootsy:
+    action:
+      refresh: Refresh
+      destroy: Delete
+      close: Close
+      load: Load
+      upload: Upload New Image
+      enter_image_url: "entrez URL de l'image"
+      submit_upload: "soumettre téléchargement"
+    image_gallery: Image Gallery
+    image:
+      s: Image
+      p: Images
+      size: Size
+      large: Large
+      medium: Medium
+      small: Small
+      original: Original
+      new: New image
+      confirm:
+        destroy: Are you sure you want to delete this image?
+      position:
+        left: Left
+        right: Right
+        inline: Inline
+    no_images_uploaded: There are currently no uploaded images.
+    js:
+      alert_unsaved: You have unsaved changes.  
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: environ une heure
+        other: environ %{count} heures
+      about_x_months:
+        one: environ un mois
+        other: environ %{count} mois
+      about_x_years:
+        one: environ un an
+        other: environ %{count} ans
+      almost_x_years:
+        one: presqu'un an
+        other: presque %{count} ans
+      half_a_minute: une demi-minute
+      less_than_x_minutes:
+        zero: moins d'une minute
+        one: moins d'une minute
+        other: moins de %{count} minutes
+      less_than_x_seconds:
+        zero: moins d'une seconde
+        one: moins d'une seconde
+        other: moins de %{count} secondes
+      over_x_years:
+        one: plus d'un an
+        other: plus de %{count} ans
+      x_days:
+        one: 1 jour
+        other: "%{count} jours"
+      x_minutes:
+        one: 1 minute
+        other: "%{count} minutes"
+      x_months:
+        one: 1 mois
+        other: "%{count} mois"
+      x_seconds:
+        one: 1 seconde
+        other: "%{count} secondes"
+    prompts:
+      day: Jour
+      hour: Heure
+      minute: Minute
+      month: Mois
+      second: Seconde
+      year: Année      
+
+

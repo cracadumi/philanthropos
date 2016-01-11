@@ -1,0 +1,204 @@
+// Place all the styles related to the dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+/* top right contact nav bar */
+.top_right_nav{
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  /*background-color: #FCE5CD;*/
+}
+
+.top_right_nav li{
+  list-style: none;
+  float: right;
+  text-align: center;
+}
+
+.top_right_nav li a {
+  display: block;
+  color: #C00000 !important;
+  padding: 5px;
+}
+
+/* main app navbar */
+.nav_bar{
+  margin-top: 15px;
+  padding-bottom: 2px;
+  text-align: center;
+}
+
+.nav_bar a{
+  font-family: 'Freescpt';
+  color: #000 !important;
+  padding: 0 12px;
+  border-right: 1px solid #000;
+  font-size: 26px;
+}
+.nav_bar a:last-child{
+  border:0;
+}
+/* right navigation menus */
+.right_nav_section{
+  float: right;
+
+}
+
+.right_upper_nav{
+  margin-top: 10px;
+  border-style: solid;
+  border-width: 1px;
+  padding:10px;
+}
+.right_upper_nav li {
+  margin: -1px 0;
+  left: 5px;
+  top: 11px;
+
+}
+.right_upper_nav li a{
+  color: #000;
+  margin: 5px;
+}
+
+/* lower right navigation menu */
+.right_lower_nav{
+  margin-top: 10px;
+  border-style: solid;
+  border-width: 1px;
+  min-height: 200px;
+  padding:10px;
+  border-color:#ddd;
+  overflow:hidden;
+}
+.mtb10{
+  margin:2px 0 10px  !important;
+}
+/* main content for each page */
+.main_content{
+  /*margin-top: 10px;*/
+  border-style: solid;
+  border-width: 1px;
+  overflow:hidden;
+  padding: 15px;
+  border-color: #ddd;
+
+}
+
+/* index page */
+
+.category_head{
+border-style: solid;
+border-width: 1px;
+padding: 10px;
+background-color: #f5f5f5;
+border-color: #ECE4E4;
+border-radius: 4px
+}
+
+.category_head a{
+  color: #000;
+  text-decoration: underline;
+}
+
+.posts {
+  margin: 10px;
+  min-height: 50px;
+}
+
+/* page main and sub heading(title) */
+.page_title{
+  text-align: center;
+}
+
+.page_sub_title{
+  margin: 20px;
+  text-decoration: underline;
+}
+
+.navbar-default{
+  background-color: #061042 !important;
+}
+.navbar-default .navbar-nav > li > a{
+  color:#fff !important;
+}
+
+.navbar {
+border-radius: 0!important;
+}
+.search_box .twitter-typeahead{
+  width:100%;
+  margin: 0px 0 0;
+}
+.tt-suggestion{
+  background: #fff;
+width: 100%;
+}
+.typeahead, .tt-query, .tt-hint {
+  border: 2px solid #CCCCCC;
+  border-radius: 8px;
+  font-size: 24px;
+  height: 30px;
+  line-height: 30px;
+  outline: medium none;
+  padding: 8px 12px;
+  width: 396px;
+}
+.typeahead {
+  background-color: #FFFFFF;
+}
+.typeahead:focus {
+  border: 2px solid #0097CF;
+}
+.tt-query {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+.tt-hint {
+  color: #999999;
+}
+.tt-dropdown-menu {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 12px;
+  padding: 8px 0;
+  width: 422px;
+}
+.tt-suggestion {
+  font-size: 24px;
+  line-height: 24px;
+  padding: 3px 20px;
+}
+.tt-suggestion.tt-is-under-cursor {
+  background-color: #0097CF;
+  color: #FFFFFF;
+}
+.tt-suggestion p {
+  margin: 0;
+}
+
+/* validation styles */
+.field_with_errors {
+  display: inline;
+}
+
+.field_with_errors .message {
+  color: #D00;
+  padding-left: 5px;
+  font-size: 12px;
+}
+
+/* exporting csv(s) */
+.export_csv ul{
+  list-style: none;
+}
+.export_csv ul li{
+  padding: 10px;
+}
+.header{
+  background: #fff;
+}
+.unstyled_list{
+  list-style: none;
+}

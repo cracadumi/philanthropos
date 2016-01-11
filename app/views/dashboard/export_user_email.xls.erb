@@ -1,0 +1,25 @@
+<?xml version='1.0'?>
+<Workbook xmlns='urn:schemas-microsoft-com:office:spreadsheet' 
+          xmlns:o='urn:schemas-microsoft-com:office:office' 
+          xmlns:x='urn:schemas-microsoft-com:office:excel' 
+          xmlns:ss='urn:schemas-microsoft-com:office:spreadsheet' 
+          xmlns:html='http://www.w3.org/TR/REC-html40'>
+    <ss:Styles>
+        <ss:Style ss:ID='header'><ss:Font ss:Bold='1'/><ss:Alignment ss:Horizontal='Center'/></ss:Style>
+        <ss:Style ss:ID='row'><ss:Alignment ss:Horizontal='Center' ss:Vertical='Center'/></ss:Style>
+    </ss:Styles>
+    <Worksheet ss:Name='Sheet1'>
+        <Table>
+            <Row ss:StyleID='header'>
+                <Cell><Data ss:Type='String'><%= t('xls_nom') %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= t('xls_email') %></Data></Cell>
+            </Row>
+            <% @users.each do |user| %>
+              <Row ss:StyleID='row'>
+                  <Cell><Data ss:Type='String'><%= user.nom%></Data></Cell>
+                  <Cell><Data ss:Type='String'><%= user.email%></Data></Cell>
+              </Row>
+            <% end %>
+        </Table>
+    </Worksheet>
+</Workbook>

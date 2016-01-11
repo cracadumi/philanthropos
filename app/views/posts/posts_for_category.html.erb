@@ -1,0 +1,7 @@
+<h4 class="page_title"><%= @category.name %></h4>
+<ul class="breadcrumb <%= show_post_filter(@category.id) %>">
+		<% @sub_category.each do |sub_cat|%>
+			<li><%=link_to sub_cat.name ,posts_for_category_post_path(sub_cat_id: sub_cat.id) %></li>
+		<% end %>
+</ul>
+<%= render :partial =>'posts/partials/show_posts', :locals => {:post_instance => @posts }%>

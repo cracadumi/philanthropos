@@ -1,0 +1,7 @@
+<div class="col-sm-12 text-center mtb">
+  <%= form_for @notification do |f| %>
+    <%= f.bootsy_area  :content, rows: '10',class: 'form-control text-area-wide', placeholder: 'WYSIWYG' %>
+    <%= f.hidden_field :notification_type, value: 'right_column' %>  
+    <%= f.submit "ENREGISTRER", class: 'btn btn-default' %>
+  <% end %>
+</div>

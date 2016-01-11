@@ -1,0 +1,43 @@
+<%#= stylesheet_link_tag 'header' %>
+
+<div class="row">
+<!-- <nav class="navbar "> -->
+<!-- <div class="container-fluid"> -->
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <%= link_to root_path do %>
+    <div class="col-md-4">
+      <%= image_tag "logo.png", class: ''%>
+    </div>
+  <% end %>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="col-md-4 search_area">
+    <%= simple_form_for '',url: search_philanthropotes_users_path, :method => 'get', html: { class: 'navbar-form navbar-left'} do |f| %>
+      <div class="input-group search_box">
+       <%= f.input :quick_search, input_html: {:class => 'typeahead team-users-autocomplete form-control left-icon', 'data-url' => get_search_info_users_path }, label: false, placeholder: 'Prenom nom / Promo' %>
+        <span class="input-group-btn">
+        <%= button_tag(type: "submit", class: "btn btn-default", name: "commit", value: "RECHERCHER") do %>
+           <i class="glyphicon glyphicon-search"></i>
+          <% end %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-4 pull-right">  
+    <ul class="top_right_nav">
+      <li><%= link_to 'Contact', dashboard_contact_us_path%></li>
+      <li><%= link_to 'Qui sommes nous? |', dashboard_qui_sommes_nous_path %></li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.row -->
+<!-- </nav> -->
+<div class="nav_bar">
+  <nav>
+    <%= link_to "News de l’Institut ", posts_for_category_post_path(1) %>
+    <%= link_to "News du réseau ", posts_for_category_post_path(2) %>
+    <%= link_to "Carnet de Vie ", posts_for_category_post_path(3) %>
+    <%= link_to "L'agora des anciens ", posts_for_category_post_path(4)  %>
+    <%= link_to "Retrouvons-nous ", posts_for_category_post_path(5) %>
+    <%= link_to "Annuaire des Philanthropotes", search_philanthropotes_users_path %>
+  </nav>
+</div>
+

@@ -1,0 +1,48 @@
+<%= javascript_include_tag 'inline_editing' %>
+<div class="">
+  <div class="">
+    <%= form_for Comment.new, url: post_comments_path(post_ref), method: :post,:html => {class: 'col-sm-12'} do |f|%>
+      <div class="form-group ">
+        <%= f.label 'Publier un commentaire', class: ' control-label ' %>
+        <div class="col-md-4">
+          <%= f.text_area :content,  class: 'form-control', placeholder: "Votre commentaire" %>
+          <%= f.hidden_field :user_id, :value => current_user.id %>
+        </div>
+        <div class="col-md-4">
+          <%= f.submit 'Publier', class: 'btn btn-default' %>
+        </div>
+      </div>  
+    <% end %>
+  </div>
+  <div class="detailBox">
+    <div class="actionBox">
+      <h5><strong><%= post_ref.comments.present? ? "Commentaires" : "" %></strong></h5>
+      <% post_ref.comments.each do |comment| %>      
+      <ul class="commentList col-md-6">                        
+          <li>
+            <div class="commenterImage">
+              <%= link_to user_path(comment.user) do %>
+                <%= image_tag get_picture(comment.user)%> <span><%= "#{comment.user.prenom} (#{get_user_promo(comment.user.promo)})" %></span>
+              <% end %>
+            </div>
+            <div class="commentText">
+                <%= best_in_place_if can?(:edit, Comment), [post_ref, comment], :content, :as => :textarea, :activator => "#activator-#{comment.id}", :ok_button => "Enregistrer", :ok_button_class => "btn", :display_with => :simple_format %> <span class="date sub-text"><%= time_ago_in_words(comment.created_at) %></span>
+            </div>                            
+          </li>
+          <% if can? :destroy, comment %>
+            <span class="btn-close">
+              <%= link_to image_tag("icon_cross_small_red.png"), post_comment_path(comment.post,comment), method: :delete, data: {confirm: "Êtes-vous sûr de vouloir supprimer cela ? Cette action ne pourra pas être annulée."}, :class => "" %>
+            </span>
+          <% end %>
+          <% if can? :edit, comment %>
+            <span class="">
+              <a href="#" id="<%="activator-#{comment.id}"%>"><%= image_tag "edit.png",class: 'edit_post' %></a>
+            </span>
+          <% end %>
+      </ul>
+      <div class="clearfix"></div> 
+      <% end %>        
+    </div>
+  </div>
+</div>
+

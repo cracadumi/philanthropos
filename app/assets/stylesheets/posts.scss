@@ -1,0 +1,163 @@
+// Place all the styles related to the posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.post_list_item{
+  margin-top: 50px;
+  overflow:hidden;
+}
+.post_list_item a img{
+  width:10px;
+}
+
+.post_content
+{
+  width: 400px;
+  text-align: justify;
+
+}
+.form-inline .form-group{
+  margin-bottom: 9px !important;
+}
+.post_footer{
+  /*margin-left: 45px;*/
+}
+a.destroy_post{
+  position: absolute;
+top: 11px;
+}
+
+.destroy_post{
+  margin-top: 10px;
+}
+
+.commentBox {
+    padding:10px;
+    border-top:1px dotted #bbb;
+}
+.commentBox .form-group:first-child, .actionBox .form-group:first-child {
+    width:80%;
+}
+.commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2) {
+    width:18%;
+}
+.actionBox .form-group * {
+    width:100%;
+}
+.taskDescription {
+    margin-top:10px 0;
+}
+.commentList {
+    padding:0;
+    list-style:none;
+    min-height:200px;
+    position: relative;
+}
+.commentList li {
+    margin:0;
+    margin-top:10px;
+}
+.commentList li > div {
+    display:table-cell;
+}
+.commenterImage img{
+  width: 35px;
+  height: 35px;
+}
+.commenterImage {
+    margin-right:5px;
+    height:100%;
+    float:left;
+}
+.commenterImage img {
+    border-radius:50%;
+}
+.commentText p {
+    margin:7px 0 0; 
+}
+.btn-close{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+}
+.btn-close img{
+  width: 10px;
+}
+.sub-text {
+    color:#aaa;
+    font-family:verdana;
+    font-size:11px;
+}
+.actionBox {
+    border-top: 0;
+padding: 15px;
+margin: 0 0 23px;
+
+}
+
+.post_title{
+  border-bottom: 1px dotted #bbb;
+}
+
+.comments_div{
+  margin-left: 40px;
+  margin-top: 10px;
+}
+
+.comments_list{
+  margin-left: 20px;
+  margin-bottom: 25px;
+  text-align: justify;
+}
+
+.time_in_words{
+  color: #C0C0C0;
+}
+ .control-label{
+  float: left;
+ }
+ .post_container{
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    background:rgba(245,245,245,0.9);
+    -webkit-box-shadow: #737FB3 2px 2px 2px;
+    -moz-box-shadow: #737FB3 2px 2px 2px; 
+    box-shadow: #737FB3 2px 2px 2px;
+ }
+ .edit_post img{
+  width: 50px !important;
+margin: 4px 10px 0;
+ }
+ .commentList .edit_post{
+position: absolute;
+top: -19px;
+right: -60px;
+width: 50px;
+height: 50px;
+margin: 0 10px;
+ }
+
+label.required:after {
+  content: " *";
+  color: red;
+}
+.field_with_errors input{
+  border: 2px solid red;  
+}
+.field_with_errors textarea{
+  border: 2px solid red;  
+}
+.field_with_errors select{
+  border: 2px solid red ; 
+}
+
+.buggy_element{
+  border: 2px solid red !important;  
+}
+.error_text{
+  color: red ; 
+}
+#nilerror{
+  font-size: 14px;
+}

@@ -1,0 +1,137 @@
+<%= javascript_include_tag 'gmaps' %>
+<%= javascript_include_tag 'tab_activation' %>
+
+<h4 class="page_title">Recherche dans l’annuaire des Philanthropotes</h4>
+<%= form_tag search_philanthropotes_users_path, method: :get, id: 'search_philanthropotes' do %>
+  <div class="">
+    <div class="col-md-6">
+      <div class="form-group row">
+        <%= label_tag t('nom'),nil,class: 'col-sm-3 control-label' %>
+        <div class="col-sm-8">
+          <%= text_field_tag :nom, params[:nom],class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= label_tag t('prenom'),nil,class: 'col-sm-3 control-label' %>
+        <div class="col-sm-8">
+          <%= text_field_tag :prenom, params[:prenom],class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= label_tag t('sex'),nil,class: 'col-sm-3 control-label' %>
+        <div class="col-sm-8">
+          <%= select_tag :ident_sexe, options_for_select(User::SEXE,params[:ident_sexe]), { :prompt =>"- sélectionner -", :class=>"form-control"} %>
+        </div>
+      </div> 
+      <div class="form-group row">
+        <%= label_tag t('current_country'),nil,class: 'col-sm-3 control-label' %>
+        <div class="col-sm-8">     
+          <%= select_tag :current_country, options_for_select(@current_countries.collect {|p|[p[:french_name],p[:name]]},params[:current_country]), { :prompt =>"- sélectionner -", :class=>"form-control"} %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= label_tag t('current_town'),nil,class: 'col-sm-3 control-label' %>
+        <div class="col-sm-8">
+          <%= text_field_tag :current_town, params[:current_town],class: 'form-control' %>
+        </div>
+      </div>    
+    </div>
+    <div class="col-md-6">
+      <div class="form-group row">
+        <%= label_tag t('promo'),nil,class: 'col-sm-3 control-label' %>
+        <div class="col-sm-8">
+          <%= select_tag :promo, options_for_select(User.uniq.order('promo ASC').pluck(:promo).map { |w| [display_promo_values_for_select(w), w] },params[:promo]), { :prompt =>"- sélectionner -", :class=>"form-control"} %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= label_tag t('occupation'),nil,class: 'col-sm-3 control-label' %>
+        <div class="col-sm-8">
+          <%= select_tag :occupation, options_for_select(User::OCCUPATIONS,params[:occupation]), { :prompt =>"- sélectionner -", :class=>"form-control"} %>
+        </div>
+      </div> 
+      <div class="form-group row">
+        <%= label_tag t('industry'),nil,class: 'col-sm-3 control-label' %>
+        <div class="col-sm-8">
+          <%= select_tag :industry, options_for_select(User::INDUSTRIES,params[:industry]), { :prompt =>"- sélectionner -", :class=>"form-control"} %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= label_tag t('keyword'),nil,class: 'col-sm-3 control-label' %>
+        <div class="col-sm-8">
+          <%= text_field_tag :keywords, params[:keywords],class: 'form-control' %>
+        </div>
+      </div>   
+    </div>
+  </div>
+  <div class="col-md-8 col-md-offset-4 text-center">
+    <div class="col-md-3">
+      <%= submit_tag 'RECHERCHER', class: 'btn btn-default', id: 'search_user_button' %>
+    </div>
+    <% unless params[:commit].present? %>
+      <div class="col-md-3">
+        <%= button_tag 'EFFACER', type: :reset, class: 'btn btn-default' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+<% if @philanthropotes.present? %>
+  <div class="col-sm-12">
+  <h4>Résultats de la recherche</h4>
+  <h5>Affichage des résultats : </h5>
+  <ul class="nav nav-tabs" role="tablist" id="myTab">
+    <li role="presentation" class="active"><a href="#mapdiv" aria-controls="home" role="tab" data-toggle="tab">sur une carte</a></li>
+    <li role="presentation"><a href="#list" aria-controls="profile" role="tab" data-toggle="tab">en liste</a></li>
+  </ul>
+</div>
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane" id="list">
+    <div class="col-sm-8 col-md-offset-1">
+      <%= hidden_field_tag 'map_data', @map_data %>
+      <% @philanthropotes.each do |user| %>
+        <div class="user_info_list">
+          <%= link_to user_path(user.id), id:'user_profile_link' do %>
+            <div class="col-sm-12 user_info_box">
+              <div class="col-sm-4 row">
+                <%= image_tag get_picture(user) ,class: 'img-responsive', id: 'user_image' %>
+              </div>
+              <div class="col-sm-8">
+                <div class="col-sm-12">
+                  <span id="nom"><%= user.get_pre_nom_and_nom %></span>
+                </div>
+                <div class="col-sm-12">
+                  <span id="promo"><%= get_user_promo(user.promo) %></span>
+                </div>
+                <div class="col-sm-12">
+                  <span id="address"><%= user.contact_info.current_town %> (<%= user.contact_info.current_country %>)</span>
+                </div>
+                <div class="col-sm-12">
+                  <span id="occupation"><%= display_if_account_is_valid(user, user.ident_activite.truncate(100)) %></span>
+                </div>
+              </div>
+              <%= hidden_field_tag :latitude, user.contact_info.latitude, id: 'user_lat' %>
+              <%= hidden_field_tag :longitude, user.contact_info.longitude, id: 'user_long' %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      <%= will_paginate @philanthropotes %>    
+    </div>
+  </div>
+  <div role="tabpanel" class="tab-pane active" id="mapdiv">
+    <div class="col-sm-12">
+      <div style='width: 800px;'>
+        <div id="map" style='width: 800px; height: 400px;'></div>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <span>Pour des raisons de discrétion, la localisation des membres sur la carte est précis à la ville, non à la rue.</span>
+    </div>
+  </div>
+</div>  
+<% else %>
+  <div class="col-sm-12">
+    <% if params[:commit].present? %>
+      <span>Aucun ancien trouvé avec ces critères de recherche !</span>
+    <% end %>
+  </div>  
+<% end %>

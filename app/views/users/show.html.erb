@@ -1,0 +1,74 @@
+<div class="col-md-12">
+  <div class="row mtb">
+    <div class="col-md-6">
+      <%= link_to '<= Retour à la recherche', url_for(:back) %>
+    </div>
+    <div class="col-md-6">
+      <% if can? :edit, @user %>
+          <%= link_to 'MODIFIER LES INFORMATIONS',edit_user_path(@user.id),class: 'btn btn-default'%>
+      <% end %>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="col-md-3">
+    <%= image_tag get_picture(@user), class: 'img-responsive'%>
+    <div class="col-md-12">
+      <% unless @user.role == 'user' %>
+        <div class="col-sm-12">
+         <span><%= display_if_account_is_valid(@user, display_user_role(@user.role)) %></span>
+        </div>  
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 user_account_details">
+      <ul class="list-unstyled">
+        <li><%= @user.get_pre_nom_and_nom %></li>
+        <li><%= get_user_promo(@user.promo) %></li>
+        <li><span><strong></strong><%= display_if_account_is_valid(@user,show_age_on_profile(@user)) %> ans</span></li>
+      </ul>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="well">
+            <ul class="list-unstyled">
+              <li><%= display_if_account_is_valid(@user, show_current_address_on_profile(@user)) %></li>
+              <li><%= display_if_account_is_valid(@user, @user.contact_info.current_city_and_cp) %></li>
+              <li><%= display_if_account_is_valid(@user, @user.contact_info.current_country) %></li>
+            </ul>
+            </div>
+        </div>
+        <div class="col-sm-6 ">
+          <div class="well">
+            <ul class="list-unstyled">
+              <li>@ : </strong><%= display_if_account_is_valid(@user, show_email_on_profile(@user)) %></li>
+              <li>Tel : </strong><%= display_if_account_is_valid(@user, show_phone_on_profile(@user)) %></li>
+            </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+  <div class="clearfix"></div>
+  <hr>
+  <div class="col-md-12">
+   <label class="label_red"><%= display_if_account_is_valid(@user, @user.occupation) %> : </label> <label><%= display_if_account_is_valid(@user, @user.ident_activite) %></label> (<%= display_if_account_is_valid(@user, @user.industry) %>)
+    <div class="clearfix"></div>
+    <br>
+ <span><%= display_if_account_is_valid(@user, simple_format(@user.about)) %></span>
+ <br>
+ <span class="pull-right"><i>Dernière modification du profil de <%= display_if_account_is_valid(@user, @user.get_pre_nom_and_nom) %> : <%= @user.get_last_modified_date.present? ? display_if_account_is_valid(@user, time_ago_in_words(@user.get_last_modified_date)) : "" %></i></span>
+ <br>
+ <hr>
+ <br>
+ </div>
+
+  </div>
+  <div class=" <%= hide_div_if_inactive(@user) %>">
+    <h4>Contacter <%= @user.get_pre_nom_and_nom%> :</h4>
+    <%= form_tag send_contact_mail_users_path do %>
+      <%= text_area_tag :message, nil,  class: 'form-control', rows: "7" %>
+      <%= hidden_field_tag :sender_id, nil, value: @user.id %>
+      <br>
+      <%= submit_tag 'ENVOYER', class: 'btn btn-default' %>
+    <% end %>
+  </div>
+</div>

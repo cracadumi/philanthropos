@@ -1,0 +1,10 @@
+.logo_image{
+  height: 60px;
+  width: auto;
+  margin-top: -5px;
+  display: block;
+}
+#footer{
+  height: 50px;
+  background: #061042;
+}

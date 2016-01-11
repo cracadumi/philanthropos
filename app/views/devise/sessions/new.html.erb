@@ -1,0 +1,34 @@
+<%= stylesheet_link_tag 'devise_views' %>
+<% content_for :head do %>
+  <meta name="robots" content="noindex,nofollow" />
+<% end %>  
+<div class="col-sm-6 col-md-4 col-md-offset-4">
+  <div class="account-wall">
+    <div id="my-tab-content" class="tab-content">
+      <div class="tab-pane active" id="login">
+        <%= image_tag "logo.png", class: 'devise-logo', alt: 'logo'%>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-signin'}) do |f| %>
+          <div class="form-group">
+          <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email', required: true %>
+          </div>
+           <div class="form-group">
+          <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Mot de passe', required: true %>
+          </div>
+          <%= f.submit "SE CONNECTER", class: 'btn btn-lg btn-default btn-block' %>
+          <% if devise_mapping.rememberable? %>
+            <div class="field">
+              <%= f.check_box :remember_me %>
+              <%= f.label 'Rester connecté' %>
+            </div>
+        <% end %>
+        <% end %>
+        <div id="tabs" data-tabs="tabs">
+          <p class="text-center">
+            <%= render "devise/shared/links" %>
+          </p>
+          <p class="text-center help-block">Identifiants inconnus ? Envoyer un email à acces.lereseau@gmail.com.<br>Etudiant actuel ? Vos identifiants vous seront communiqués lors de la journée annuelle. Patience ;)</li></ul></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

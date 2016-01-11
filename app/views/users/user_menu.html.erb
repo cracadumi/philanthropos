@@ -1,0 +1,19 @@
+<% @user_list.each do |user| %>
+<div class="row">
+  <div class="co-sm-6">
+    <div class="col-sm-12">
+      <%= link_to user_path(user.id) do %>
+        <div class="col-md-4 user_holder_div">
+          <div class="col-md-4">
+            <%= image_tag get_picture(user) ,class: 'img-responsive' %>
+          </div>
+          <div class="col-md-6">
+            <p><strong><%= user.prenom %></strong> <%= user.nom %></p> 
+            <p>Promo<strong><%= get_user_promo(user.promo) %></strong></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %> 

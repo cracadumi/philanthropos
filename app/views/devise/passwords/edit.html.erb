@@ -1,0 +1,33 @@
+<%= stylesheet_link_tag 'devise_views' %>
+<div class="col-sm-6 col-md-4 col-md-offset-4">
+  <div class="account-wall">
+    <div class="tab-pane">
+    <%= image_tag "logo.png", class: 'devise-logo', alt: 'logo'%>
+    <h3 class="text-center">Changez votre mot de passe</h3>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: 'form-signin' }) do |f| %>
+      <%= devise_error_messages! %>
+      <%= f.hidden_field :reset_password_token %>
+
+      <div class="field form-group">
+        <%= f.label :password, "Nouveau mot de passe" %><br />
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> caractères minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autofocus: true, autocomplete: "off", class: 'form-control' %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :password_confirmation, "Confirmer le nouveau mot de passe" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Changer mon mot de passe", class: 'btn btn-lg btn-default btn-block' %>
+      </div>
+    <% end %>
+
+    <p class="text-center"><a><%= render "devise/shared/links" %></a></p>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,24 @@
+<h4 class="page_title">Module d'import / export CSV</h4>
+<div class="col-sm-6 col-sm-offset-2">
+<div class="row csv_import_form">
+  <h5 class="page_sub_title">Importer des membres</h5>
+  <%= form_tag dashboard_import_user_info_path, multipart: true do %>
+    <div class="form-group">
+      <div class="input-group">
+        <%= file_field_tag :file, class: 'form-control' %>
+        <span class="input-group-btn">
+          <%= submit_tag "IMPORTER", class: 'btn btn-default' %> 
+        </span>
+      </div>
+    </div>  
+  <% end %>
+  <h5 class="page_sub_title">Exporter les informations de l’annuaire </h5>
+    <div class="export_csv">
+      <ul>
+        <li class="col-md-12"><span class='col-md-8'>Mise à jour de la base de données de l’Institut </span><%= link_to 'EXPORTER', dashboard_export_user_data_path, class: 'btn btn-default col-md-4'%></li>
+        <li class="col-md-12"><span class='col-md-8'>Exporter toutes les informations de l’annuaire</span><%= link_to 'EXPORTER', dashboard_export_full_db_data_path(format: "xls"), class: 'btn btn-default pull-right col-md-4'%></li>
+        <li class="col-md-12"><span class='col-md-8'>Exporter les emails uniquement</span><%= link_to 'EXPORTER', dashboard_export_user_email_path(format: "xls"), class: 'btn btn-default pull-right col-md-4'%></li>
+      </ul>
+    </div>
+</div>
+</div>

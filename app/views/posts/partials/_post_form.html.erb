@@ -1,0 +1,41 @@
+<%= javascript_include_tag 'validate_subcategory' %>
+<div class="col-sm-12">
+  <%= form_for @post, validate: true, multipart: true, :html => {:id => "post_form"} do |f| %>
+    <div class="form-group ">
+      <%= f.label t('category'), class: 'col-sm-2 control-label' %>
+      <% options = options_from_collection_for_select(set_category_options(current_user), 'id', 'name', @post.category_id) %>
+      <div class="col-sm-4">
+        <%= f.select :category_id,  options, {}, {class: 'form-control', id: 'category_select'} %>
+      </div>
+    </div>
+    <div class="form-group" id="sub_category_div">
+      <%= f.label t('subcategory'), class: 'col-sm-2 control-label' %>
+      <div class="col-sm-4">
+        <% sub_category_options = options_from_collection_for_select(Subcategory.all, 'id', 'name', @post.subcategory_id) %>
+        <%= f.select :subcategory_id,  sub_category_options, {include_blank: '- sélectionner -'}, {class: 'form-control', id: 'subcategory_select', required: true} %>
+        <label id="nilerror" class="error_text">ne peut pas être vide</label>
+      </div>
+    </div>
+    <div class="form-group ">
+      <%= f.label t('title'), class: 'col-sm-2 control-label' %>
+      <div class="col-sm-4">
+        <%= f.text_field :title,  class: 'form-control', id: 'post_title_field' %>
+      </div>
+    </div> 
+    <div class="form-group ">
+      <%= f.label t('content'), class: 'col-sm-2 control-label' %>
+      <div class="col-sm-4">
+        <%= f.text_area :content,  class: 'form-control', rows: "7", id: 'post_content_area' %>
+      </div>
+    </div>     
+    <div class="form-group ">
+      <%= f.label t('post_image'), class: 'col-sm-2 control-label' %>
+      <div class="col-sm-4">
+        <%= f.file_field :picture_url, class: ' form-control' %>
+      </div>
+      <div class="col-sm-4">
+        <%=f.submit 'PUBLIER', class: 'btn btn-default', id: 'post_submit'%>
+      </div>
+    </div>
+  <% end %>
+</div>

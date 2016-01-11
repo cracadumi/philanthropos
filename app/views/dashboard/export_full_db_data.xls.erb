@@ -1,0 +1,73 @@
+<?xml version='1.0'?>
+<Workbook xmlns='urn:schemas-microsoft-com:office:spreadsheet' 
+          xmlns:o='urn:schemas-microsoft-com:office:office' 
+          xmlns:x='urn:schemas-microsoft-com:office:excel' 
+          xmlns:ss='urn:schemas-microsoft-com:office:spreadsheet' 
+          xmlns:html='http://www.w3.org/TR/REC-html40'>
+    <ss:Styles>
+        <ss:Style ss:ID='header'><ss:Font ss:Bold='1'/><ss:Alignment ss:Horizontal='Center'/></ss:Style>
+        <ss:Style ss:ID='row'><ss:Alignment ss:Horizontal='Center' ss:Vertical='Center'/></ss:Style>
+    </ss:Styles>
+    <Worksheet ss:Name='Sheet1'>
+      <Table>
+          <Row ss:StyleID='header'>
+            <Cell><Data ss:Type='String'><%= "Id_adresse" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Nom" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Nom_jfille" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Prénom" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Photo" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Ident_sexe" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Promo" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Mail" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Ident_date_naissance" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Ident_nationalité" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Adresse" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "NPA_localite" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Pays" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Tel_home" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Adresse_actuelle" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Code_postal_actuel" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Ville_actuelle" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Pays_actuel" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Tel_natel" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Activité" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Domaine_activité" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Ident_activité" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "A_propos" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Date_modif" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Date_import" %></Data></Cell>
+            <Cell><Data ss:Type='String'><%= "Fiche_active" %></Data></Cell>
+          </Row>
+            <% @users.each do |user| %>
+              <Row ss:StyleID='row'>
+                <Cell><Data ss:Type='String'><%= user.d_adresse %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.nom %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.maiden_name %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.prenom %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.picture_url.present? ? File.basename(user.picture_url.path) : "" %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= gender_code(user.ident_sexe) %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.promo %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.email %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.ident_date_naissance %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.ident_nationalite %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.contact_info.adresse %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.contact_info.npa_localite %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.contact_info.pays %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.contact_info.tel_home %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.contact_info.current_address %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.contact_info.current_postcode %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.contact_info.current_town %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= Country.find_by_name(user.contact_info.current_country).first %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.contact_info.tel_natel %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.occupation %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.industry %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.ident_activite %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.about %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.get_last_modified_date %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.created_at %></Data></Cell>
+                <Cell><Data ss:Type='String'><%= user.active %></Data></Cell>
+              </Row>
+            <% end %>
+      </Table>
+    </Worksheet>
+</Workbook>

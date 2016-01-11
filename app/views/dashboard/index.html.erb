@@ -1,0 +1,87 @@
+<h4 class="page_title">Bienvenue sur le Réseau</h4>
+
+<div class="latest_posts">
+  <div class="col-sm-12">
+    <div class="category_head hidden">
+      <div class="row">
+        <div class="col-md-6">
+          <strong>Les dernières publications</strong>
+        </div>
+        <div class="col-md-6">
+          <%#= link_to "Toutes les publications ->", posts_for_category_post_path(1) %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="posts">
+    <%= render :partial =>'posts/partials/show_posts', :locals => {:post_instance => @latest_posts }%>
+  </div>
+</div>
+<!-- <div class="latest_posts">
+  <div class="col-sm-12">
+    <div class="category_head">
+      <div class="row">
+        <div class="col-md-6">
+          <strong>News du réseau</strong>
+        </div>
+        <div class="col-md-6">
+          <%#= link_to "Toutes les publications ->", posts_for_category_post_path(2) %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="posts">
+    <%#= render :partial =>'posts/partials/show_posts', :locals => {:post_instance => @news_du_reseu }%>
+  </div>
+</div> -->
+<!-- <div class="latest_posts">
+  <div class="col-sm-12">
+    <div class="category_head">
+      <div class="row">
+        <div class="col-md-6">
+          <strong>Cornet de Vie</strong>
+        </div>
+        <div class="col-md-6">
+          <%#= link_to "Toutes les publications ->", posts_for_category_post_path(3) %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="posts">
+    <%#= render :partial =>'posts/partials/show_posts', :locals => {:post_instance => @cornet_de_vie }%>
+  </div>
+</div> -->
+<!-- <div class="latest_posts">
+  <div class="col-sm-12">
+    <div class="category_head">
+      <div class="row">
+        <div class="col-md-6">
+          <strong>Retrouvons-nous</strong>
+        </div>
+        <div class="col-md-6">
+          <%#= link_to "Toutes les publications ->", posts_for_category_post_path(5) %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="posts">
+    <%#= render :partial =>'posts/partials/show_posts', :locals => {:post_instance => @retrouvons_nous }%>
+  </div>
+</div> -->
+<!-- <div class="latest_posts">
+  <div class="col-sm-12">
+    <div class="category_head">
+      <div class="row">
+        <div class="col-md-6">
+          <strong>L'agara des anciens</strong>
+        </div>
+        <div class="col-md-6">
+          <%#= link_to "Toutes les publications ->", posts_for_category_post_path(4) %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="posts">
+     <%#= render :partial =>'posts/partials/show_posts', :locals => {:post_instance => @l_agara_des_anciens }%>
+  </div>
+</div> -->

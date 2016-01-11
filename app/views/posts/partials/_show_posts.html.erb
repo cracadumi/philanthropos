@@ -1,0 +1,5 @@
+<% post_instance.each do |post_object| %>
+  <%= render :partial =>'posts/partials/post_body', :locals => {:post => post_object }%>
+<% end %>
+  <%= will_paginate post_instance %>
+
