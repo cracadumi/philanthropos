@@ -80,6 +80,7 @@ gem 'best_in_place'
 gem 'rufus-scheduler'
 # boosty text editor
 gem 'bootsy'
+gem 'postmark-rails'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
