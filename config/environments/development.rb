@@ -50,8 +50,8 @@ Rails.application.configure do
       :address => "smtp.gmail.com",
       :port => 587,
       :domain => "www.gmail.com",
-      :user_name => "zaeem@chimpchamp.com",
-      :password => "helloworld81",
+      user_name: ENV["GMAIL_USERNAME"],
+      password: ENV["GMAIL_PASSWORD"],
       :authentication => "plain"
   }
 
