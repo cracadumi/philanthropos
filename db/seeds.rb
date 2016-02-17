@@ -12,7 +12,7 @@ Category.create!(name: "L'agora des anciens", description: "Tous types d'annonce
 Category.create!(name: "Retrouvons nous", description: "Annonce sur les rencontres prévu en régions")
 
 # # # create admin
-user = User.create(:email => "devadnan.yousaf@gmail.com",:d_adresse=> 123, :password => "12341234", :password_confirmation => "12341234", :nom => "Adnan", :prenom => "Yousaf", :picture_url => "", :ident_sexe => 1, :promo => 1, :ident_date_naissance => "04-01-1987", :ident_nationalite => "Pakistani", :role => 0, :active => true, :about => "Ruby on Rails Engineer", :ident_activite => "development", :industry => "Culture", :occupation => "Etudiant")
+user = User.create(:email => "lereseauphilanthropos@gmail.com",:d_adresse=> 123, :password => "12341234", :password_confirmation => "12341234", :nom => "Adnan", :prenom => "Yousaf", :picture_url => "", :ident_sexe => 1, :promo => 1, :ident_date_naissance => "04-01-1987", :ident_nationalite => "Pakistani", :role => 0, :active => true, :about => "Ruby on Rails Engineer", :ident_activite => "development", :industry => "Culture", :occupation => "Etudiant")
 cf = ContactInfo.new(:adresse => "Sample addresse", :npa_localite => "SAMPLE LOCALITE", :pays => "AE", :tel_home=> "23123123", :current_postcode => "54000", :current_town => "Lyon", :current_country => "France", :tel_natel => "23123123", :current_postcode => "54000", :current_address => "Sample address")
 cf.save
 user.contact_info = cf

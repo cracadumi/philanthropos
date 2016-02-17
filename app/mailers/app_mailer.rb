@@ -1,5 +1,5 @@
 class AppMailer < ApplicationMailer
-  default from: "devadnan.yousaf@gmail.com"
+  default from: "lereseauphilanthropos@gmail.com"
 
   def contact_user_mail user, sender, message 
     @user = user
