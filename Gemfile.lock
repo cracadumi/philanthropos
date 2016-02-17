@@ -241,6 +241,12 @@ GEM
     phony_rails (0.12.10)
       activesupport (>= 3.0)
       phony (~> 2.12)
+    postmark (1.7.1)
+      json
+      rake
+    postmark-rails (0.12.0)
+      actionmailer (>= 3.0.0)
+      postmark (~> 1.7.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -359,6 +365,7 @@ DEPENDENCIES
   pg
   pg_search
   phony_rails
+  postmark-rails
   rails (= 4.2.0)
   rails4-autocomplete
   rails_12factor
@@ -378,3 +385,6 @@ DEPENDENCIES
   utf8-cleaner
   web-console (~> 2.0)
   will_paginate
+
+BUNDLED WITH
+   1.11.2
