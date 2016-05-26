@@ -127,7 +127,7 @@ class UsersController < ApplicationController
 
   def map_info_array users
     map_data = users.map do |u|
-      { id: u.id, nom: u.get_pre_nom_and_nom, picture_url: u.picture_url.present? ? u.picture_url.url(:thumb) : "/assets/users/avatar.png", promo: u.promo==0 ? "Institut" : "Promo #{u.promo}", ident_active: u.active? ? u.ident_activite.truncate(100) : '', address: "#{u.contact_info.current_town} (#{u.contact_info.current_country})", lat: u.contact_info.latitude,lng: u.contact_info.longitude}
+      { id: u.id, nom: u.get_pre_nom_and_nom, picture_url: u.picture_url.present? ? u.picture_url.url(:thumb) : "/assets/users/avatar.png", promo: u.promo==0 ? "Institut" : "Promo #{u.promo}", ident_active: u.active? ? u.ident_activite.to_s.truncate(100) : '', address: "#{u.contact_info.current_town} (#{u.contact_info.current_country})", lat: u.contact_info.latitude,lng: u.contact_info.longitude}
     end
 
   map_data.to_json   
